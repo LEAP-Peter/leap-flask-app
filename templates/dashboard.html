@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+</head>
+<body>
+  <div style="display: flex; height: 100vh;">
+
+    <div style="width: 200px; background-color: #f0f0f0; display: flex; flex-direction: column; justify-content: space-between; padding: 10px;">
+
+      <div>
+        <h3>Menu</h3>
+        <ul>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/contents">My Contents</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <form action="/logout" method="get">
+          <button type="submit" style="width: 100%; background-color: red; color: white; padding: 8px; border: none;">Logout</button>
+        </form>
+      </div>
+    </div>
+
+    <div style="flex: 1; padding: 20px;">
+      <h1>Welcome to Dashboard</h1>
+      <p>Here is your announcement.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

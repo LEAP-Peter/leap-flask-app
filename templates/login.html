@@ -1,21 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login Interface</title>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
-    <h1>Login Interface</h1>
-    <form action="/login" method="post">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        
-        <button type="submit">Login</button>
+  <div class="stars" id="stars"></div>
+
+  <div class="login-container">
+    <h1>Login</h1>
+    <form method="POST" action="{{ url_for('login') }}">
+      
+      <!-- 每个表单控件用 form-group 包裹 -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autofocus>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+
+      <button type="submit">Login</button>
     </form>
 
-    <p><a href="/forget">Forgot password?</a></p>
+    <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+  <script>
+    // 可选：在背景加点星星
+    const starsContainer = document.getElementById('stars');
+    if (starsContainer) {
+      for (let i = 0; i < 100; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        s.style.top  = Math.random() * 100 + 'vh';
+        s.style.left = Math.random() * 100 + 'vw';
+        starsContainer.appendChild(s);
+      }
+    }
+  </script>
 </body>
 </html>

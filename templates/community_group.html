@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ group_name|capitalize }} Community</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/community.css') }}">
+</head>
+<body>
+    <a href="{{ url_for('communities') }}">← Back to all communities</a>
+    <h1>Welcome to the {{ group_name.capitalize() }} Galaxy Community</h1>
+    <div class="post-list">
+        {% if posts %}
+            <ul>
+            {% for post in posts %}
+                <li>
+                    <b>{{ post['title'] }}</b>
+                    <span style="color:#aaa;">by {{ post['username'] }}</span>
+                    <span style="color:#aaa; font-size: 0.9em;">{{ post['created_at'] }}</span>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No posts in this community yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Profile</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/user_info.css') }}">
+</head>
+<body>
+  <!-- 顶部导航返回 Dashboard -->
+  <nav>
+    <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+  </nav>
+
+  <div class="profile-container">
+    <h1>Your Profile</h1>
+
+    <!-- Flash 提示区域 -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, msg in messages %}
+            <li class="{{ category }}">{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('user_info') }}">
+      <div class="form-group">
+        <label for="real_name">Real Name</label>
+        <input type="text" id="real_name" name="real_name"
+               value="{{ user['real_name'] }}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"
+               value="{{ user['username'] }}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email (不可更改)</label>
+        <input type="email" id="email" name="email"
+               value="{{ user['email'] }}" disabled>
+      </div>
+
+      <div class="form-group">
+        <label for="profession">Profession</label>
+        <input type="text" id="profession" name="profession"
+               value="{{ user['profession'] }}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="profession_group">Profession Group</label>
+        <select id="profession_group" name="profession_group" required>
+          {% for grp in ['engineer','artist','teacher','scientist','writer','student'] %}
+            <option value="{{ grp }}"
+              {% if grp==user['profession_group'] %}selected{% endif %}>
+              {{ grp.capitalize() }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="star_color">Star Color</label>
+        <!-- HTML5 color picker -->
+        <input type="color" id="star_color" name="star_color"
+               value="{{ user['star_color'] or '#FFD700' }}">
+      </div>
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/user_info.js') }}"></script>
+</body>
+</html>

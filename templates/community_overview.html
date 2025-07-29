@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Communities</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/community.css') }}">
+</head>
+<body>
+    <h1>All Profession Communities</h1>
+    <div class="communities-list">
+        {% for group in profession_groups %}
+        <a class="community-card" href="{{ url_for('community_group', group_name=group) }}">
+            <div class="community-icon">{{ group[0]|upper }}</div>
+            <div class="community-name">{{ group.capitalize() }} Galaxy</div>
+        </a>
+        {% endfor %}
+    </div>
+</body>
+</html>

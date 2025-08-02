@@ -52,3 +52,20 @@ body {
 .logout-btn:hover {
     background: #1b85b8;
 }
+
+.community-button {
+    position: absolute;
+    top: 20px;
+    right: 80px; /* 避开 Logout 按钮，避免重叠 */
+}
+
+.rocket-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.rocket-icon:hover {
+    transform: scale(1.1);
+}

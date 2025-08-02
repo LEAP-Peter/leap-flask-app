@@ -7,12 +7,26 @@
 </head>
 <body>
     <div id="galaxy-container">
+        <!-- 固定星星颜色读取数据库值 -->
         <div id="user-star"
              style="background-color: {{ star_color }}; box-shadow: 0 0 36px 10px {{ star_color }};">
         </div>
         <!-- 其他内容 -->
     </div>
+
+    <!-- 🚀 跳转到社区概览按钮 -->
+    <div class="community-button">
+        <a href="{{ url_for('community_overview') }}" title="Go to Community Overview">
+            <svg xmlns="http://www.w3.org/2000/svg" class="rocket-icon" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2C13.1 2 14 2.9 14 4V6.5C15.6 6.8 17.1 7.6 18.3 8.8C20.5 11 20.9 14 20 16.4L18 14L14 18L16.4 20C14 20.9 11 20.5 8.8 18.3C7.6 17.1 6.8 15.6 6.5 14H4C2.9 14 2 13.1 2 12V11C2 9.9 2.9 9 4 9H6.5C6.8 7.6 7.6 6.1 8.8 4.9C10 3.7 11.5 2.9 13.1 2.6V4C13.1 2.9 12 2 12 2Z"/>
+                <circle cx="12" cy="12" r="2" fill="#1b3b6f"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- 登出按钮 -->
     <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>

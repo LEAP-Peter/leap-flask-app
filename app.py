@@ -28,7 +28,7 @@ def register():
         profession      = request.form['profession']
         profession_group= request.form['profession_group']
 
-        # 生成一次性随机星星
+        # 生成一次性随机星星，仅注册时生成一次
         star_color = "#{:02X}{:02X}{:02X}".format(
             random.randint(200,255),
             random.randint(150,220),
@@ -87,7 +87,7 @@ def dashboard():
     conn = get_connection()
     cursor = conn.cursor()
 
-    # 读取用户基本信息 + 持久化星星颜色
+    # 读取用户基本信息 + 固定星星颜色（不再随机）
     cursor.execute(
         "SELECT username, profession_group, star_color FROM users WHERE id=?",
         (user_id,)
@@ -107,7 +107,6 @@ def dashboard():
     group_users = cursor.fetchall()
     conn.close()
 
-    # 转换为可在模板中迭代的列表
     group_list = [
         {'real_name': u['real_name'], 'profession': u['profession']}
         for u in group_users
@@ -136,7 +135,6 @@ def user_info():
     cursor = conn.cursor()
 
     if request.method == 'POST':
-        # 从表单获取更新字段
         real_name       = request.form['real_name']
         username        = request.form['username']
         profession      = request.form['profession']
@@ -155,7 +153,6 @@ def user_info():
         conn.commit()
         flash("Your profile has been updated.", "success")
 
-    # 每次都重新读取最新数据
     cursor.execute('''
         SELECT real_name, username, email, profession, profession_group, star_color
           FROM users
@@ -166,9 +163,8 @@ def user_info():
 
     return render_template('user_info.html', user=user)
 
-# ------- 社区总览与子社区 -------
-@app.route('/communities')
-def communities():
+@app.route('/community_overview')
+def community_overview():
     if 'user_id' not in session:
         return redirect(url_for('login'))
     return render_template('community_overview.html', profession_groups=PROFESSION_GROUPS)

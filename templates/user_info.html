@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/user_info.css') }}">
 </head>
 <body>
-  <!-- 顶部导航返回 Dashboard -->
   <nav>
     <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
   </nav>
@@ -14,7 +13,6 @@
   <div class="profile-container">
     <h1>Your Profile</h1>
 
-    <!-- Flash 提示区域 -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <ul class="flashes">
@@ -64,7 +62,6 @@
 
       <div class="form-group">
         <label for="star_color">Star Color</label>
-        <!-- HTML5 color picker -->
         <input type="color" id="star_color" name="star_color"
                value="{{ user['star_color'] or '#FFD700' }}">
       </div>

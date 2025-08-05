@@ -2,18 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Communities</title>
+    <title>Communities Overview</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/community.css') }}">
 </head>
 <body>
     <h1>All Profession Communities</h1>
     <div class="communities-list">
         {% for group in profession_groups %}
-        <a class="community-card" href="{{ url_for('community_group', group_name=group) }}">
-            <div class="community-icon">{{ group[0]|upper }}</div>
-            <div class="community-name">{{ group.capitalize() }} Galaxy</div>
+        <a class="community-card" href="{{ url_for('community_group', group_name=group.name) }}">
+            <!-- 首字母大写图标 -->
+            <div class="community-icon">{{ group.name[0] | upper }}</div>
+            <!-- 使用 display 字段渲染完整名称 -->
+            <div class="community-name">{{ group.display }}</div>
         </a>
         {% endfor %}
     </div>
 </body>
 </html>
+

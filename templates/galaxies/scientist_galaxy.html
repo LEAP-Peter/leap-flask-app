@@ -1,32 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>{{ group_name|capitalize }} Galaxy</title>
-</head>
-<body style="background-color:#1b3b6f; color:white; font-family:sans-serif;">
+
+{% extends "base.html" %}
+
+{% block title %}{{ group_name|capitalize }} Galaxy{% endblock %}
+
+{% block content %}
   <h1>{{ group_name|capitalize }} Galaxy</h1>
 
-  <!-- 发帖表单 -->
-  <form action="{{ url_for('community_group', group_name=group_name) }}" method="POST">
-    <textarea name="content" placeholder="Write your post..." required></textarea><br>
-    <button type="submit">Post</button>
+  <!-- 发帖 -->
+  <form action="{{ url_for('community_group', group_name=group_name) }}" method="POST" style="margin:16px 0;">
+    <textarea name="content" placeholder="Write your post..." required
+              style="width:100%;max-width:720px;height:110px;border-radius:8px;border:1px solid rgba(255,255,255,.3);padding:10px;background:rgba(255,255,255,.06);color:#fff;"></textarea><br>
+    <button type="submit" style="margin-top:8px;padding:8px 14px;border-radius:8px;border:none;background:#fff;color:#1b3b6f;cursor:pointer;">
+      Post
+    </button>
   </form>
 
   <h2>Posts</h2>
   {% for post in posts %}
-    <div style="border:1px solid white; padding:10px; margin:10px;">
-      <strong>{{ post['username'] }}</strong> ({{ post['timestamp'] }})
-      <p>{{ post['content'] }}</p>
+    <div style="border:1px solid rgba(255,255,255,.25); padding:12px; margin:12px 0; border-radius:10px; background:rgba(0,0,0,.15);">
+      <strong>{{ post['username'] }}</strong>
+      <span style="opacity:.8; font-size:12px;"> ({{ post['timestamp'] }})</span>
+      <p style="margin-top:8px;">{{ post['content'] }}</p>
 
-      <!-- 评论表单 -->
-      <form action="{{ url_for('comment', post_id=post['id']) }}" method="POST">
-        <input type="text" name="comment_content" placeholder="Add a comment..." required>
-        <button type="submit">Comment</button>
+      <!-- 评论 -->
+      <form action="{{ url_for('comment', post_id=post['id']) }}" method="POST" style="margin-top:8px;">
+        <input type="text" name="comment_content" placeholder="Add a comment..." required
+               style="width:100%;max-width:520px;border-radius:8px;border:1px solid rgba(255,255,255,.3);padding:8px;background:rgba(255,255,255,.06);color:#fff;">
+        <button type="submit" style="margin-left:6px;padding:8px 12px;border-radius:8px;border:none;background:#fff;color:#1b3b6f;cursor:pointer;">
+          Comment
+        </button>
       </form>
     </div>
   {% else %}
     <p>No posts yet.</p>
   {% endfor %}
-</body>
-</html>
+{% endblock %}
+
